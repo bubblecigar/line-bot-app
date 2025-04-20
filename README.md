@@ -51,6 +51,22 @@ line-bot-app
    curl -X POST http://localhost:3000/webhook -H "Content-Type: application/json" -d '{"message": "Hello, LINE bot!"}'
    ```
 
+6. **Test with line webhook:**
+   ```
+   Expose local endpoint:
+   a. npm run start (at port 3000)
+   b. ngrok http 3000
+   c. get exposed URL (Forwarding [url] -> localhost 3000)
+
+   Set the exposed URL as webhook endpoint:
+   a. goto line developer console https://developers.line.biz/console/
+   b. select application
+   c. goto messaging api tab (https://developers.line.biz/console/channel/[channel ID]/messaging-api)
+   d. set up expoed URL as webhook URL and enable the webhook option
+   e. send a message in line
+   f. check the server log
+   ```
+
 ## Usage Examples
 
 - To set up a webhook, configure your LINE bot settings to point to your server's endpoint.
