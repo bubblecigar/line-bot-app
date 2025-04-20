@@ -11,6 +11,9 @@ export class LineController {
                 // Add logic to handle different types of events
             });
         }
-        res.status(200).send('OK');
+
+        const message = req.body?.message;
+
+        res.status(200).send(message ? message : 'No message found');
     }
 }
