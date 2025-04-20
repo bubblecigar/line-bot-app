@@ -7,8 +7,11 @@ export class LineController {
     private lineClient: Client;
 
     constructor() {
+
+        console.log(process.env);
+
         this.lineClient = new Client({
-            channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN || '',
+            channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN || 'test',
         });
     }
 
