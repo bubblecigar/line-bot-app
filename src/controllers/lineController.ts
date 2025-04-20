@@ -13,12 +13,16 @@ export class LineController {
     }
 
     public async handleWebhook(req: any, res: any): Promise<void> {
-        console.log(req.body);
+
+        const destination = req.body.destination;
+
+        console.log('Received webhook from LINE:', destination);
 
         const events = req.body.events;
         if (events && events.length > 0) {
             await Promise.all(
                 events.map(async (event: WebhookEvent) => {
+                    console.log('handling event:', event);
                     if (event.type === 'message' && event.message.type === 'text') {
                         const replyToken = event.replyToken;
                         const userMessage = event.message.text;
