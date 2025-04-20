@@ -46,6 +46,11 @@ line-bot-app
    npm start
    ```
 
+5. **Test the application:**
+   ```
+   curl -X POST http://localhost:3000/webhook -H "Content-Type: application/json" -d '{"message": "Hello, LINE bot!"}'
+   ```
+
 ## Usage Examples
 
 - To set up a webhook, configure your LINE bot settings to point to your server's endpoint.
