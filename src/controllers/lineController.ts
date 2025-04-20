@@ -1,5 +1,8 @@
 export class LineController {
     public handleWebhook(req: any, res: any): void {
+
+        console.log(req.body);
+
         const events = req.body.events;
         if (events && events.length > 0) {
             events.forEach((event: any) => {
