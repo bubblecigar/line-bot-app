@@ -12,6 +12,20 @@ export class LineController {
         });
     }
 
+    private async _handleTextMessage(
+        replyToken: string,
+        userMessage: string,
+    ) {
+        // Echo the user's message back
+        await this.lineClient.replyMessage(
+            replyToken,
+            {
+                type: 'text',
+                text: `You said: ${userMessage}`,
+            }
+        );
+    }
+
     public async handleWebhook(req: any, res: any): Promise<void> {
 
         const destination = req.body.destination;
@@ -22,16 +36,14 @@ export class LineController {
         if (events && events.length > 0) {
             await Promise.all(
                 events.map(async (event: WebhookEvent) => {
-                    console.log('handling event:', event);
-                    if (event.type === 'message' && event.message.type === 'text') {
-                        const replyToken = event.replyToken;
-                        const userMessage = event.message.text;
 
-                        // Echo the user's message back
-                        await this.lineClient.replyMessage(replyToken, {
-                            type: 'text',
-                            text: `You said: ${userMessage}`,
-                        });
+                    console.log('handling event:', event);
+
+                    if (event.type === 'message' && event.message.type === 'text') {
+                        await this._handleTextMessage(
+                            event.replyToken,
+                            event.message.text,
+                        );
                     }
                 })
             );
